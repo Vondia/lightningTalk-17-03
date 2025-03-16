@@ -206,18 +206,24 @@ button {
 /* Subgrid cards */
 .subgrid-container {
     /* Define rows for the container that will be inherited by subgrids */
-    grid-template-rows: repeat(6, auto);
+    grid-template-rows: repeat(5, auto);
+    /* Define nested columns for each card slot (2 columns per card) */
+    grid-template-columns: repeat(3, 1fr 1fr);
+    column-gap: 20px;
+    row-gap: 0;
 }
 
 .subgrid-container .card {
     display: grid;
+    grid-column: span 2; /* Each card spans 2 columns in the parent grid */
     grid-template-columns: subgrid; /* Inherit columns from parent */
     grid-template-rows: subgrid; /* Inherit rows from parent */
-    grid-row: span 6; /* Span all 6 rows defined in the container */
+    grid-row: span 5; /* Span all 6 rows defined in the container */
     padding: 15px;
+    gap: 10px;
 }
 
-/* Card elements */
+/* Card elements for both regular and subgrid */
 .card-header {
     grid-column: 1 / -1;
     background-color: #4a6fa5;
@@ -243,6 +249,7 @@ button {
     border-radius: 4px;
 }
 
+/* Title and price styling for both regular and subgrid cards */
 .card-title {
     grid-column: 1 / 2;
     font-weight: bold;
