@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple HTML Page</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Lightning talk 17-03-2025</h1>
+      </header>
+      <main>
+        <section>
+          <h2>CSS</h2>
+          <p>Subjects of today's talk:</p>
+          <ul>
+            <li>Relative Colors</li>
+            <li>@property for CSS animations</li>
+            <li>Logical Properties</li>
+            <li>Bonus/tip: View Transitions API</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Relative Colors</h2>
+          <div>
+            <p>
+              Relative colors in CSS allow you to define colors that are mathematically related to other colors. Using the <code>oklch()</code> color format with the <code>from</code> function, you can create borders, hover states, and other elements that automatically adapt when you change the base color.
+            </p>
+            <button class="button-1">Button</button>
+            <button class="button-2">Button</button>
+            <button class="button-3">Button</button>
+            <button class="button-4">Button</button>
+            <p>
+              Each button above uses a CSS variable for its background color, with borders that are automatically 15% darker using <code>border: 2px solid oklch(from var(--bg-color) calc(1 - 0.15) c h)</code>. This means you only need to change one value to update the entire button styling while maintaining proper color relationships.
+            </p>
+          </div>
+        </section>
+        <section>
+          <h2>Subgrid</h2>
+          <div>
+            <p>
+              CSS Subgrid allows nested grids to inherit the grid lines of their parent grid. This makes it much easier to align elements across different components and create consistent layouts.
+            </p>
+            <p class="demo-instruction"><strong>Compare:</strong> Notice how the content in the regular nested grid cards (top) doesn't align across cards, while the subgrid cards (bottom) perfectly align regardless of content length.</p>
+
+            <div class="subgrid-demo">
+              <h3 class="grid-section-title">Regular Nested Grid</h3>
+              <div class="card-container regular-container">
+                <div class="card">
+                  <div class="card-header">Short Title</div>
+                  <div class="card-image"></div>
+                  <div class="card-title">Product A</div>
+                  <div class="card-price">$49.99</div>
+                  <div class="card-description">A brief description.</div>
+                  <button class="card-button">Add to Cart</button>
+                </div>
+
+                <div class="card">
+                  <div class="card-header">Medium Length Product Title</div>
+                  <div class="card-image"></div>
+                  <div class="card-title">Product B with a longer name</div>
+                  <div class="card-price">$129.99</div>
+                  <div class="card-description">This product has a medium-length description that takes up more space than the others.</div>
+                  <button class="card-button">Add to Cart</button>
+                </div>
+
+                <div class="card">
+                  <div class="card-header">Very Long Product Title That Wraps to Multiple Lines</div>
+                  <div class="card-image"></div>
+                  <div class="card-title">Product C</div>
+                  <div class="card-price">$89.99</div>
+                  <div class="card-description">This product has a very detailed description with lots of information about features and benefits that customers might want to know before making a purchase decision.</div>
+                  <button class="card-button">Add to Cart</button>
+                </div>
+              </div>
+
+              <h3 class="grid-section-title">With Subgrid</h3>
+              <div class="card-container subgrid-container">
+                <div class="card">
+                  <div class="card-header">Short Title</div>
+                  <div class="card-image"></div>
+                  <div class="card-title">Product A</div>
+                  <div class="card-price">$49.99</div>
+                  <div class="card-description">A brief description.</div>
+                  <button class="card-button">Add to Cart</button>
+                </div>
+
+                <div class="card">
+                  <div class="card-header">Medium Length Product Title</div>
+                  <div class="card-image"></div>
+                  <div class="card-title">Product B with a longer name</div>
+                  <div class="card-price">$129.99</div>
+                  <div class="card-description">This product has a medium-length description that takes up more space than the others.</div>
+                  <button class="card-button">Add to Cart</button>
+                </div>
+
+                <div class="card">
+                  <div class="card-header">Very Long Product Title That Wraps to Multiple Lines</div>
+                  <div class="card-image"></div>
+                  <div class="card-title">Product C</div>
+                  <div class="card-price">$89.99</div>
+                  <div class="card-description">This product has a very detailed description with lots of information about features and benefits that customers might want to know before making a purchase decision.</div>
+                  <button class="card-button">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+
+            <p class="demo-explanation">
+              <strong>Why this matters:</strong> With regular nested grids, each card's layout is independent, causing misalignment when content lengths vary. With subgrid, all cards share the parent grid's lines, ensuring perfect alignment across all cards regardless of content length.
+            </p>
+          </div>
+        </section>
+        <section>
+          <h2>Logical Properties</h2>
+          <div>
+            <p>
+              Logical properties adapt to the writing direction of the document,
+              making internationalization easier. Compare
+              <code>padding-left</code> vs <code>padding-inline-start</code> in
+              different writing modes:
+            </p>
+
+            <div class="logical-demo">
+              <div class="demo-controls">
+                <button id="toggle-direction">
+                  Toggle Direction (LTR ↔ RTL)
+                </button>
+                <button id="toggle-vertical">Toggle Vertical Writing</button>
+              </div>
+
+              <div class="demo-container">
+                <div class="demo-box physical-props">
+                  <h3>Physical Properties</h3>
+                  <p class="demo-text">
+                    This text uses <code>padding-left: 30px</code> which always
+                    applies padding to the left side, regardless of writing
+                    direction.
+                  </p>
+                </div>
+
+                <div class="demo-box logical-props">
+                  <h3>Logical Properties</h3>
+                  <p class="demo-text">
+                    This text uses <code>padding-inline-start: 30px</code> which
+                    applies padding to the start of the text flow, adapting to
+                    writing direction.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <p class="demo-explanation">
+              Logical properties like <code>inline-start</code>,
+              <code>inline-end</code>, <code>block-start</code>, and
+              <code>block-end</code>
+              replace physical directions (left, right, top, bottom). This makes
+              your CSS more adaptable to different languages and writing
+              systems.
+            </p>
+          </div>
+        </section>
+        <section>
+          <h2>BONUS:View Transitions API (maybe a cool subject to have a talk or workshop about)</h2>
+          <div>
+            <p>
+              The View Transitions API makes it easy to create smooth, animated transitions between different states of your web application. Previously, creating these animations required complex JavaScript and careful state management, but now it's built directly into browsers.
+            </p>
+
+            <div class="video-container">
+              <iframe
+                width="100%"
+                height="400"
+                src="https://www.youtube.com/embed/OTP4hhX_xpM"
+                title="View Transitions API in React"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+              </iframe>
+            </div>
+
+            <p class="video-explanation">
+              This video demonstrates how to use the View Transitions API with React. The API provides a simple way to create smooth transitions between page states, improving user experience with minimal effort. Key benefits include:
+            </p>
+            <ul class="benefits-list">
+              <li>Simple implementation with minimal code</li>
+              <li>Smooth animations between page states</li>
+              <li>Works with existing DOM elements</li>
+              <li>Can be integrated with frameworks like React</li>
+              <li>Improves perceived performance and user experience</li>
+            </ul>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <p>&copy; 2025 Lightning talk Pim vd Bosch</p>
+      </footer>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const directionButton = document.getElementById("toggle-direction");
+        const verticalButton = document.getElementById("toggle-vertical");
+        const demoContainer = document.querySelector(".demo-container");
+
+        directionButton.addEventListener("click", function () {
+          demoContainer.classList.toggle("rtl-mode");
+          if (demoContainer.classList.contains("rtl-mode")) {
+            directionButton.textContent = "Switch to LTR";
+          } else {
+            directionButton.textContent = "Switch to RTL";
+          }
+        });
+
+        verticalButton.addEventListener("click", function () {
+          demoContainer.classList.toggle("vertical-mode");
+          if (demoContainer.classList.contains("vertical-mode")) {
+            verticalButton.textContent = "Switch to Horizontal";
+          } else {
+            verticalButton.textContent = "Toggle Vertical Writing";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
